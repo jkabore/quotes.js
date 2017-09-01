@@ -2,8 +2,12 @@
 // when user clicks anywhere on the button, the "printQuote" function is called
 //object quotes in an array
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
+var quote;
+var source;
+var citation;
+var year;
+var tag;
+var message;
 var quotes = [
     {
         quote: "No matter how old you are, there's always something good to look forward to. ",
@@ -32,8 +36,7 @@ var quotes = [
         citation: "Things Fall Apart",
         year: 1958,
         tag: "Change"
-
-  },
+ },
     {
         quote: " If you can make a woman laugh, you can make her do anything",
         source: "Marilyn Monroe",
@@ -62,50 +65,30 @@ var quotes = [
         tag: "Coincidence"
         },
 ];
-var showQuotes = [];
-var randomQuote;
+//document.getElementById('loadQuote').addEventListener("click", randomQuote);
+// function that will generate random quotes
+    var randomQuote = function getRandomQuote(){
+		var randomNumber= Math.floor(Math.random()*quotes.length);
+		quote= quotes[randomNumber].quote;
+        source= quotes[randomNumber].source;
+        citation= quotes[randomNumber].citation;
+        year= quotes[randomNumber].year;
+        tag= quotes[randomNumber].tag;
+		message = '<p>'+ quote +'</p>' + '<p>'+ source +'</p>' + '<p>' + citation +'</p>'+ '<p>'+ year+'</p>'+ '<p>'+tag + '</p>';
+		document.getElementById("quote-box").innerHTML = message;
+		document.getElementById("rbgcolor").style.backgroundColor = randColors();
 
-// Function that will generate randoom quotes
-function getRandomQuote() {
-    Math.floor(Math.random() * quotes.length) = randomQuote;
-    var splicedQuote = quotes.splice(randomQuote, 1)[0]
-    showQuotes.push(splicedQuote);
-    return splicedQuote;
-    if (quotes.lenght == 0) {
-        showQuotes = quotes;
-    };
-    return splicedQuote;
-};
-
-// function to print a quote from the array
-function printQuote() {
-    var quotes = getRandomQuote();
-    var outputDiv = document.getElementById("quote-box");
-    outputDiv.innerHTML = quote;
-};
-var message = '<p class="quote">' + quotes.quote + '</p>';
-message += '<p class="source">' + quotes.source +
-    '<span class="citation">' + quotes.citation + '</span>' +
-    '<span class="year">' + quotes.year + '</span>' +
-    '<span tag="tag">' + quotes.tag + '</span>'
-'</p>';
-print(message);
-
+		};
 var red;
 var green;
 var blue;
-var randomColor;
-// function that will create a colors
-function randomColors() {
+var nIntervId;
+// function that will generate random colors
+    var randColors = function randomColors() {
+	var randomcolor;
     red = Math.floor(Math.random() * 256);
     green = Math.floor(Math.random() * 256);
     blue = Math.floor(Math.random() * 256);
-    randomColor = red + green + blue;
-};
-
-var nIntervId;
-
-function changeColor() {
-    nIntervId = setInterval(message, 6000);
-    document.getElementById("rbgcolor").style.backgroundColor = randomColorGenerator();
-};
+    col = 'rgb(' + red + ',' + green + ',' + blue + ')';
+	return col;
+		document.getElementById('loadQuote').addEventListener("click", randomQuote);
